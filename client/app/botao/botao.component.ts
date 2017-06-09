@@ -14,10 +14,7 @@ export class BotaoComponent {
     @Output() acao = new EventEmitter();
     @Input() confirmacao: boolean = false;
 
-    constructor() {
-
-    }
-
+   
     executeAction() {
 
         if( this.confirmacao ) {
