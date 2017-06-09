@@ -27,8 +27,5 @@ export class BotaoComponent {
             return;
         }
         this.acao.emit(null);
-
-
-        
     }
 }
