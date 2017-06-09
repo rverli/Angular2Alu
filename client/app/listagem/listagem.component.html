@@ -1,0 +1,38 @@
+<div class="jumbotron">
+    <h1 class="text-center">Alurapic</h1>
+</div>
+
+<div class="container">
+
+    <p *ngIf="mensage.length" class="alert alert-info">{{mensage}}</p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="input-group">
+                    <span class="input-group-bnt">
+                        <a [routerLink]="['/cadastro']" class="btn btn-primary">
+                            Nova Foto
+                        </a>                        
+                    </span>
+                    <input #textoProcurado (keyup)="0" class="form-control" placeholder="Filtrar pelo título da foto">
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <panel *ngFor="let photo of photos | filterByTitle: textoProcurado.value" title="{{photo.titulo | uppercase}}" class="col-md-2">
+
+        <a [routerLink]="['/cadastro', photo._id]">
+            <photo url="{{photo.url}}" title="{{photo.titulo}}"></photo>
+        </a>
+        <br>
+
+        <botao nome="Remover" estilo="btn-danger btn-block" (acao)="remove(photo)" confirmacao="true"></botao>
+
+        <!--<button class="btn btn-danger btn-block" (click)="remove(photo)">Remover</button>-->
+    </panel>
+    </div>
+</div>

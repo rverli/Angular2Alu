@@ -1,0 +1,69 @@
+<div class="container">
+
+    <h1 class="text-center">{{photo.titulo}}</h1>
+
+    <form [formGroup]="myForm" class="row" (submit)="save($event)">
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label>Título</label>                
+                <!-- DATABIND UNIDIRECIONAL-->
+                <!--<input (input)="photo.titulo = $event.target.value" [value]="photo.titulo" class="form-control"  autocomplete="off">-->
+                <!-- DATABIND BIDIRECIONAL-->    
+                <input 
+                    class="form-control"
+                    formControlName="titulo"
+                    name="titulo" 
+                    [(ngModel)]="photo.titulo"
+                    autocomplete="off">
+
+                <div *ngIf="myForm.controls.titulo.invalid">
+                    <span *ngIf="myForm.controls.titulo.errors.required" class="form-control alert-danger">
+                        Título obrigatório
+                    </span>
+                    <span *ngIf="myForm.controls.titulo.errors.minlength" class="form-control alert-danger">
+                        Título deve ter no mínimo 4 caracteres
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>URL</label>
+                <input 
+                    class="form-control"
+                    formControlName="url"
+                    name="url" 
+                    [(ngModel)]="photo.url"
+                    autocomplete="off">
+                <span *ngIf="myForm.controls.url.invalid" class="form-control alert-danger">
+                    URL obrigatório
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea 
+                    class="form-control"
+                    formControlName="descricao"
+                    name="descricao" 
+                    [(ngModel)]="photo.descricao" 
+                    autocomplete="off" >
+                </textarea>
+            </div>
+
+            <botao nome="Salvar" estilo="btn-primary" tipo="submit" [desabilitado]="myForm.invalid"></botao>
+            <!--
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
+                Salvar
+            </button>
+            -->
+             <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+            <hr>
+        </div>
+        <div class="col-md-6">
+            <photo url="{{photo.url}}" title="{{photo.titulo}}">
+            </photo>
+        </div>
+    </form>
+</div>
